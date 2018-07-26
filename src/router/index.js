@@ -7,8 +7,11 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '',
-      redirect: '/home'
+      path: '/',
+      redirect: '/home',
+      meta: {
+        title: '首页'
+      }
     },
     {
       path: '/home',
@@ -28,7 +31,10 @@ export default new Router({
     },
     {
       path: '*',
-      redirect: 'home'
+      redirect: '/home',
+      meta: {
+        title: '首页'
+      }
     }
   ]
 })

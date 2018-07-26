@@ -18,9 +18,19 @@
           <router-link to="/">页面3</router-link>
         </li>
       </ul>
-      <p class="userIcon">
-          <router-link to="/user" class="iconfont icon-account" tag="span"></router-link>
-      </p>
+      <ul class="userIcon">
+        <li v-if="$store.state.isLogin === 1">
+          <router-link to="/user">
+            <img class="uerPhone" src="../../assets/logo.png" alt="">
+          </router-link>
+        </li>
+        <li v-if="$store.state.isLogin === 0" class="register">
+          <router-link to="/register" tag="span">注册</router-link>
+        </li>
+        <li v-if="$store.state.isLogin === 0" class="login">
+          <router-link to="/login" tag="span">登录</router-link>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -59,6 +69,37 @@ export default {
           line-height: 40px;
           font-size: 20px;
           padding: 0 20px;
+        }
+      }
+      .userIcon {
+        height: 40px;
+        display: flex;
+        display: -webkit-flex;
+        align-items: center;
+        li {
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+        .uerPhone {
+          height: 30px;
+          width: 30px;
+          border-radius: 50%;
+          background: #fff;
+          vertical-align: bottom;
+        }
+        .register {
+          width: 50px;
+          margin-right: 10px;
+          background: yellow;
+          color: green;
+        }
+        .login {
+          width: 50px;
+          background: green;
+          // color: yellow;
         }
       }
     }

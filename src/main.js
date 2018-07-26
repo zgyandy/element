@@ -14,8 +14,8 @@ require('./assets/css/common.css')
 
 Vue.config.productionTip = false
 router.beforeEach((to, from, next) => {
-  if (to.mate) {
-    document.title = to.mate.title
+  if (to.meta) {
+    document.title = to.meta.title
   }
   next()
 })
