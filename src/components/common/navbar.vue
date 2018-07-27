@@ -24,12 +24,8 @@
             <img class="uerPhone" src="../../assets/logo.png" alt="">
           </router-link>
         </li>
-        <li v-if="$store.state.isLogin === 0" class="register">
-          <router-link to="/register" tag="span">注册</router-link>
-        </li>
-        <li v-if="$store.state.isLogin === 0" class="login">
-          <router-link to="/login" tag="span">登录</router-link>
-        </li>
+        <li v-if="$store.state.isLogin === 0" @click.self="reg" class="register">注册</li>
+        <li v-if="$store.state.isLogin === 0" @click.self="log" class="login">登录</li>
       </ul>
     </div>
   </div>
@@ -37,7 +33,14 @@
 
 <script>
 export default {
-
+  methods: {
+    reg () {
+      this.$emit('sign')
+    },
+    log () {
+      this.$emit('sign', {blLog: true})
+    }
+  }
 }
 </script>
 
