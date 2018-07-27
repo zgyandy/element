@@ -41,8 +41,27 @@ input, textarea {
   outline: none;
   border: none;
 }
+input::placeholder{
+  color: gray;
+  font-size: 16px;
+}
+input:-ms-input-placeholder {
+  color: gray;
+  font-size: 16px;
+}
+input::-moz-placeholder {
+  color: gray;
+  font-size: 16px;
+}
+input::-webkit-input-placeholder {
+  color: gray;
+  font-size: 16px;
+}
 em {
   font-style: normal;
+}
+.pointer {
+  cursor: pointer;
 }
 /* iconfont */
 .iconfont {

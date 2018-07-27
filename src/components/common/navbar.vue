@@ -35,10 +35,10 @@
 export default {
   methods: {
     reg () {
-      this.$emit('sign')
+      this.$emit('ragister')
     },
     log () {
-      this.$emit('sign', {blLog: true})
+      this.$emit('signIn')
     }
   }
 }

@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <navbar v-if="$store.state.blNav" @sign="sign"></navbar>
+    <navbar v-if="$store.state.blNav" @signIn="signIn" @ragister="ragister"></navbar>
     <router-view/>
     <!-- 注册 -->
-    <register v-if="$store.state.blReg"  @sign="sign"></register>
+    <register v-if="blReg"  @closeHint="closeHint"></register>
     <!-- 登录 -->
-    <login v-if="blLog" @sign="sign"></login>
+    <login v-if="blLog" @closeHint="closeHint"></login>
     <footbar v-if="$store.state.blFoo"></footbar>
   </div>
 </template>
@@ -41,8 +41,15 @@ export default {
 
   },
   methods: {
-    signIn (bl) {
+    signIn () {
       this.blLog = true
+    },
+    ragister () {
+      this.blReg = true
+    },
+    closeHint () {
+      this.blLog = false
+      this.blReg = false
     }
   }
 }
