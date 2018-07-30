@@ -64,6 +64,10 @@ em {
 /* 内容 */
 .content {
   background: #fff;
+  width: 1180px;
+  margin: 0 auto;
+  padding: 34px 10px 10px;
+  margin-bottom: 30px;
 }
 /* 光标样式 */
 .pointer {

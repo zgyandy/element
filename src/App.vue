@@ -6,7 +6,7 @@
     <register v-if="blReg"  @closeHint="closeHint"></register>
     <!-- 登录 -->
     <login v-if="blLog" @closeHint="closeHint"></login>
-    <footbar v-if="$store.state.blFoo"></footbar>
+    <!-- <footbar v-if="$store.state.blFoo"></footbar> -->
   </div>
 </template>
 
