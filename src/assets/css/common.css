@@ -22,7 +22,8 @@ ul,ol {
   list-style: none;
 }
 body {
-  font: 16px "微软雅黑", HELVETICA;
+  font: 12px "微软雅黑", HELVETICA;
+  background: #f6f7fb;
 }
 a {
   color: #fff;
@@ -60,6 +61,11 @@ input::-webkit-input-placeholder {
 em {
   font-style: normal;
 }
+/* 内容 */
+.content {
+  background: #fff;
+}
+/* 光标样式 */
 .pointer {
   cursor: pointer;
 }
