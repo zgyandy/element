@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <navbar v-if="$store.state.blNav" @signIn="signIn" @ragister="ragister"></navbar>
+    <navbar ref='navbar' v-if="$store.state.blNav" @signIn="signIn" @ragister="ragister"></navbar>
     <router-view/>
     <!-- 注册 -->
     <register v-if="blReg"  @closeHint="closeHint"></register>
@@ -20,7 +20,8 @@ export default {
   data () {
     return {
       blLog: false,
-      blReg: false
+      blReg: false,
+      navArr: []
     }
   },
   beforeCreate () {
@@ -32,13 +33,10 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$route.path)
+    this.$refs.navbar.activeFn()
   },
   components: {
     navbar, footbar, register, login
-  },
-  updated () {
-
   },
   methods: {
     signIn () {
@@ -55,6 +53,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="less" scoped>
+  #app {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
 </style>

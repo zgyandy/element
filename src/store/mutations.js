@@ -1,22 +1,28 @@
 import * as types from './type.js'
 export default {
-  add: (state, data) => {
+  add: (state, payload) => {
     state.num++
   },
-  rad: (state, data) => {
+  rad: (state, payload) => {
     state.num--
   },
-  loginIn: (state, data) => {
+  loginIn: (state, payload) => {
     state.isLogin = 1
   },
-  loginOut: (state, data) => {
+  loginOut: (state, payload) => {
     state.isLogin = 0
   },
-  blNav: (state, data) => {
-    state.blNav = data
+  blNav: (state, payload) => {
+    state.blNav = payload
   },
-  blFoo: (state, data) => {
-    state.blFoo = data
+  blFoo: (state, payload) => {
+    state.blFoo = payload
+  },
+  SANNAV: (state, payload) => {
+    state.navArr = payload
+  },
+  CURRENTPATH: (state, payload) => {
+    state.currentpath = payload
   },
   [types.AddTest]: (state) => {
     state.test++

@@ -32,42 +32,18 @@
     <!-- 导航 -->
     <div class="nav">
       <ul class="navList layout">
-        <li class="active">
-          <router-link to="/home" tag="div"><span>首页</span><em class="el-icon-caret-top"></em></router-link>
-        </li>
-        <li>
-          <router-link to="/" tag="div"><span>线索管理</span><em class="el-icon-caret-top"></em></router-link>
-        </li>
-        <li>
-          <router-link to="/" tag="div"><span>营销费用</span><em class="el-icon-caret-top"></em></router-link>
-        </li>
-        <li>
-          <router-link to="/" tag="div"><span>销售管理</span><em class="el-icon-caret-top"></em></router-link>
-        </li>
-        <li>
-          <router-link to="/" tag="div"><span>订单管理</span><em class="el-icon-caret-top"></em></router-link>
-        </li>
-        <li>
-          <router-link to="/" tag="div"><span>渠道管理</span><em class="el-icon-caret-top"></em></router-link>
-        </li>
-        <li>
-          <router-link to="/" tag="div"><span>营销费用</span><em class="el-icon-caret-top"></em></router-link>
-        </li>
-        <li>
-          <router-link to="/" tag="div"><span>数据统计</span><em class="el-icon-caret-top"></em></router-link>
-        </li>
-        <li>
-          <router-link to="/" tag="div"><span>产品管理</span><em class="el-icon-caret-top"></em></router-link>
-        </li>
-        <li>
-          <router-link to="/" tag="div"><span>系统设置</span><em class="el-icon-caret-top"></em></router-link>
+        <li :class="{'active': currentPath.indexOf(item.path) !== -1}" v-for="(item, key) in firArr" :key="key" name='item.path' @click.stop="activeFn">
+          <router-link :to="item.path">
+            <span>{{item.name}}</span>
+            <em :class="{'el-icon-caret-bottom': currentPath.indexOf(item.path) !== -1, 'el-icon-caret-top': currentPath.indexOf(item.path) === -1}"></em>
+          </router-link>
         </li>
       </ul>
     </div>
     <!-- 子导航 -->
-    <ul class="navSan layout" v-if="navArr.length > 1">
-      <li v-for="(item, key) in 1" :key="key">
-        <router-link to="/" tag="div"><span>系统设置</span></router-link>
+    <ul class="navSan layout" v-if="$store.state.navArr.length > 1">
+      <li :class="{'active': currentPath.indexOf(item.path) !== -1}" v-for="(item, key) in $store.state.navArr" :key="key" @click.stop="activeFn">
+        <router-link :to="item.path"><span>{{item.name}}</span></router-link>
       </li>
     </ul>
   </div>
@@ -84,7 +60,23 @@ export default {
       callNum: 12,
       msgNum: 3,
       active: '',
-      navArr: [] // 子导航
+      firArr: [
+        {name: '首页', path: '/home'},
+        {name: '线索管理', path: '/clues'},
+        {name: '销售管理', path: '/sales'},
+        {name: '订单管理', path: '/order'},
+        {name: '渠道管理', path: '/channel'},
+        {name: '营销费用', path: '/marketing'},
+        {name: '产品管理', path: '/product'},
+        {name: '数据统计', path: '/statistics'},
+        {name: '系统设置', path: '/setting'}
+      ],
+      currentPath: sessionStorage.getItem('currentPath')
+    }
+  },
+  methods: {
+    activeFn () {
+      this.currentPath = sessionStorage.getItem('currentPath')
     }
   }
 }
@@ -174,6 +166,9 @@ export default {
           font-size: 16px;
           border-right: 1px #ccc solid;
           cursor: pointer;
+          a {
+            color: inherit;
+          }
         }
         li:first-child{
           width: 60px;
@@ -188,6 +183,15 @@ export default {
       height: 48px;
       font-size: 16px;
       line-height: 48px;
+      display: flex;
+      display: -webkit-flex;
+      li {
+        width: 100px;
+        text-align: center;
+        a {
+          color: inherit;
+        }
+      }
     }
 
   }
