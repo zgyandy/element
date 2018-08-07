@@ -48,14 +48,14 @@
     <p class="resultShow">
       <span>找到相关结果<em class="red">{{resultNum}}个，</em></span>
       <span v-for="(item, key) in date" :key="key"><em class="blue">{{item}}</em><span v-show="key === 0">&nbsp;至&nbsp;</span></span>
-      <span>新线索<em class="rd">12</em>个，</span>
+      <span>新线索<em class="red">12</em>个，</span>
       <span>有效单<em class="red">12</em>个，</span>
       <span>待定单<em class="red">12</em>个，</span>
       <span>无效单<em class="red">12</em>个，</span>
       <span>放弃单<em class="red">12</em>个。</span>
     </p>
     <div class="tableBox">
-      <el-table :data="tableData" style="width: 1180px">
+      <el-table :data="tabData" style="width: 1180px" border>
         <el-table-column prop="date" label="日期" sortable align="center" width="94"></el-table-column>
         <el-table-column label="新线索" align="center">
           <el-table-column prop="newClue" label="总量" width="32"></el-table-column>
@@ -95,15 +95,14 @@
         <el-table-column align="center" label="责任人" prop="name" width="70"></el-table-column>
         <el-table-column align="center" label="所在部门" prop="department" width="90">
           <template slot-scope="scope">
-            <el-popover trigger="hover" placement="top">
-              <p>{{ scope.row.department }}</p>
+            <el-popover trigger="hover" placement="top" width="100" :content="scope.row.department">
               <div slot="reference" class="name-wrapper">{{ scope.row.department }}</div>
             </el-popover>
           </template>
         </el-table-column>
         <el-table-column align="center" label="渠道来源" prop="source">
           <template slot-scope="scope">
-            <el-popover trigger="hover" placement="top">
+            <el-popover trigger="hover" placement="top" width="160">
               <p>{{ scope.row.source }}</p>
               <div slot="reference" class="name-wrapper">{{ scope.row.source }}</div>
             </el-popover>
@@ -112,16 +111,15 @@
       </el-table>
     </div>
     <!-- 分页 -->
-    <dl class="pageResult">
-      <dt></dt>
-      <dd>
+    <div class="pageResult">
         <el-pagination
-          background
-          layout="prev, pager, next"
+          :background="true"
+          :page-size="20"
+          :total="tableData.length"
+          layout="prev, pager, next, jumper"
+          @current-change="fn"
         ></el-pagination>
-      </dd>
-    </dl>
-
+    </div>
   </div>
 </template>
 
@@ -477,17 +475,274 @@ export default {
         department: '市场部/市场部主管',
         source: '网路流量/竞价/百度搜索',
         address: '上海市普陀区金沙江路 1516 弄'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        newClue: 48,
+        newClueA: 12,
+        newClueB: 12,
+        newClueC: 12,
+        newClueD: 12,
+        Aclue: 48,
+        Aeffective: 12,
+        Adetermined: 12,
+        Ainvalid: 12,
+        AgiveUp: 12,
+        Bclue: 48,
+        Beffective: 12,
+        Bdetermined: 12,
+        Binvalid: 12,
+        BgiveUp: 12,
+        Cclue: 48,
+        Ceffective: 12,
+        Cdetermined: 12,
+        Cinvalid: 12,
+        CgiveUp: 12,
+        Dclue: 48,
+        Deffective: 12,
+        Ddetermined: 12,
+        Dinvalid: 12,
+        DgiveUp: 12,
+        department: '市场部/市场部主管',
+        source: '网路流量/竞价/百度搜索',
+        address: '上海市普陀区金沙江路 1519 弄'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        newClue: 48,
+        newClueA: 12,
+        newClueB: 12,
+        newClueC: 12,
+        newClueD: 12,
+        Aclue: 48,
+        Aeffective: 12,
+        Adetermined: 12,
+        Ainvalid: 12,
+        AgiveUp: 12,
+        Bclue: 48,
+        Beffective: 12,
+        Bdetermined: 12,
+        Binvalid: 12,
+        BgiveUp: 12,
+        Cclue: 48,
+        Ceffective: 12,
+        Cdetermined: 12,
+        Cinvalid: 12,
+        CgiveUp: 12,
+        Dclue: 48,
+        Deffective: 12,
+        Ddetermined: 12,
+        Dinvalid: 12,
+        DgiveUp: 12,
+        department: '市场部/市场部主管',
+        source: '网路流量/竞价/百度搜索',
+        address: '上海市普陀区金沙江路 1519 弄'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        newClue: 48,
+        newClueA: 12,
+        newClueB: 12,
+        newClueC: 12,
+        newClueD: 12,
+        Aclue: 48,
+        Aeffective: 12,
+        Adetermined: 12,
+        Ainvalid: 12,
+        AgiveUp: 12,
+        Bclue: 48,
+        Beffective: 12,
+        Bdetermined: 12,
+        Binvalid: 12,
+        BgiveUp: 12,
+        Cclue: 48,
+        Ceffective: 12,
+        Cdetermined: 12,
+        Cinvalid: 12,
+        CgiveUp: 12,
+        Dclue: 48,
+        Deffective: 12,
+        Ddetermined: 12,
+        Dinvalid: 12,
+        DgiveUp: 12,
+        department: '市场部/市场部主管',
+        source: '网路流量/竞价/百度搜索',
+        address: '上海市普陀区金沙江路 1519 弄'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        newClue: 48,
+        newClueA: 12,
+        newClueB: 12,
+        newClueC: 12,
+        newClueD: 12,
+        Aclue: 48,
+        Aeffective: 12,
+        Adetermined: 12,
+        Ainvalid: 12,
+        AgiveUp: 12,
+        Bclue: 48,
+        Beffective: 12,
+        Bdetermined: 12,
+        Binvalid: 12,
+        BgiveUp: 12,
+        Cclue: 48,
+        Ceffective: 12,
+        Cdetermined: 12,
+        Cinvalid: 12,
+        CgiveUp: 12,
+        Dclue: 48,
+        Deffective: 12,
+        Ddetermined: 12,
+        Dinvalid: 12,
+        DgiveUp: 12,
+        department: '市场部/市场部主管',
+        source: '网路流量/竞价/百度搜索',
+        address: '上海市普陀区金沙江路 1519 弄'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        newClue: 48,
+        newClueA: 12,
+        newClueB: 12,
+        newClueC: 12,
+        newClueD: 12,
+        Aclue: 48,
+        Aeffective: 12,
+        Adetermined: 12,
+        Ainvalid: 12,
+        AgiveUp: 12,
+        Bclue: 48,
+        Beffective: 12,
+        Bdetermined: 12,
+        Binvalid: 12,
+        BgiveUp: 12,
+        Cclue: 48,
+        Ceffective: 12,
+        Cdetermined: 12,
+        Cinvalid: 12,
+        CgiveUp: 12,
+        Dclue: 48,
+        Deffective: 12,
+        Ddetermined: 12,
+        Dinvalid: 12,
+        DgiveUp: 12,
+        department: '市场部/市场部主管',
+        source: '网路流量/竞价/百度搜索',
+        address: '上海市普陀区金沙江路 1519 弄'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        newClue: 48,
+        newClueA: 12,
+        newClueB: 12,
+        newClueC: 12,
+        newClueD: 12,
+        Aclue: 48,
+        Aeffective: 12,
+        Adetermined: 12,
+        Ainvalid: 12,
+        AgiveUp: 12,
+        Bclue: 48,
+        Beffective: 12,
+        Bdetermined: 12,
+        Binvalid: 12,
+        BgiveUp: 12,
+        Cclue: 48,
+        Ceffective: 12,
+        Cdetermined: 12,
+        Cinvalid: 12,
+        CgiveUp: 12,
+        Dclue: 48,
+        Deffective: 12,
+        Ddetermined: 12,
+        Dinvalid: 12,
+        DgiveUp: 12,
+        department: '市场部/市场部主管',
+        source: '网路流量/竞价/百度搜索',
+        address: '上海市普陀区金沙江路 1519 弄'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        newClue: 48,
+        newClueA: 12,
+        newClueB: 12,
+        newClueC: 12,
+        newClueD: 12,
+        Aclue: 48,
+        Aeffective: 12,
+        Adetermined: 12,
+        Ainvalid: 12,
+        AgiveUp: 12,
+        Bclue: 48,
+        Beffective: 12,
+        Bdetermined: 12,
+        Binvalid: 12,
+        BgiveUp: 12,
+        Cclue: 48,
+        Ceffective: 12,
+        Cdetermined: 12,
+        Cinvalid: 12,
+        CgiveUp: 12,
+        Dclue: 48,
+        Deffective: 12,
+        Ddetermined: 12,
+        Dinvalid: 12,
+        DgiveUp: 12,
+        department: '市场部/市场部主管',
+        source: '网路流量/竞价/百度搜索',
+        address: '上海市普陀区金沙江路 1519 弄'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        newClue: 48,
+        newClueA: 12,
+        newClueB: 12,
+        newClueC: 12,
+        newClueD: 12,
+        Aclue: 48,
+        Aeffective: 12,
+        Adetermined: 12,
+        Ainvalid: 12,
+        AgiveUp: 12,
+        Bclue: 48,
+        Beffective: 12,
+        Bdetermined: 12,
+        Binvalid: 12,
+        BgiveUp: 12,
+        Cclue: 48,
+        Ceffective: 12,
+        Cdetermined: 12,
+        Cinvalid: 12,
+        CgiveUp: 12,
+        Dclue: 48,
+        Deffective: 12,
+        Ddetermined: 12,
+        Dinvalid: 12,
+        DgiveUp: 12,
+        department: '市场部/市场部主管',
+        source: '网路流量/竞价/百度搜索',
+        address: '上海市普陀区金沙江路 1519 弄'
       }],
-      source: []
+      source: [],
+      num: 0,
+      tabData: []
     }
   },
   methods: {
     dateFn () {
       console.log(this.source)
+    },
+    fn (n) {
+      console.log(n, 3)
+      // this.num = n
+      this.tabData = this.tableData.slice((n - 1) * 20, ((n - 1) * 20 + 20) > this.tableData.length ? this.tableData.length : (n - 1) * 20 + 20)
     }
   },
+  beforeCreate () {
+    // this.tabData = this.tableData.slice(n * 20,(n*20 + 20) > this.tableData.length ? this.tableData.length : n*20 + 20)
+  },
   mounted () {
-
   }
 }
 </script>
@@ -525,31 +780,14 @@ export default {
       font-size: 14px;
     }
     .tableBox {
-      .el-table--border th:first-child .cell {
-        padding: 0;
-        text-align: center;
-        word-break: normal;
-      }
-      .cell {
-        padding: 0;
-        text-align: center;
-        word-break: normal;
-        .name-wrapper {
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          cursor: pointer;
-        }
-      }
-      .el-table__row:nth-child(even) {
-        background: #f5f7fa;
-      }
+      box-sizing: border-box;
     }
     .pageResult {
       height: 36px;
+      padding-top: 20px;
       display: flex;
       display: -webkit-flex;
-      justify-content: space-between;
+      justify-content: flex-end;
     }
 
   }

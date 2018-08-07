@@ -87,3 +87,23 @@ em {
   width: 1200px;
   margin: 0 auto;
 }
+/* element ui 默认样式修改 */
+table .el-table--border th:first-child .cell {
+  padding: 0;
+  text-align: center;
+  word-break: normal;
+}
+table .cell {
+  padding: 0 !important;
+  text-align: center;
+  word-break: normal;
+}
+table .cell .name-wrapper {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+.el-table__row:nth-child(even) {
+  background: #f5f7fa;
+}

@@ -4,10 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store/index.js'
-import {Button, Select, Radio, Input, InputNumber, Carousel, CarouselItem, DatePicker, TimePicker, Cascader, Table, TableColumn, Pagination, Popover, Tag} from 'element-ui'
+import {Button, Select, Option, Radio, Input, InputNumber, Carousel, CarouselItem, DatePicker, TimePicker, Cascader, Table, TableColumn, Pagination, Popover, Tag} from 'element-ui'
 
 Vue.component(Button.name, Button)
 Vue.component(Select.name, Select)
+Vue.component(Option.name, Option)
 Vue.component(Radio.name, Radio)
 Vue.component(Input.name, Input)
 Vue.component(InputNumber.name, InputNumber)
