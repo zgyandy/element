@@ -17,9 +17,9 @@
         </p>
         <p>
           <span>线索类别：</span>
-          <el-select placeholder="请选择" v-model="cluesState">
+          <el-select placeholder="请选择线索类别" v-model="cluesCategory" @change="fn">
             <el-option
-            v-for="(item, key) in options"
+            v-for="(item, key) in category"
             :key="key"
             :label="item.label"
             :value="item.value"></el-option>
@@ -27,7 +27,7 @@
         </p>
         <p>
           <span>线索类型：</span>
-          <el-select placeholder="请选择" v-model="cluesState">
+          <el-select placeholder="请选择" v-model="clueType">
             <el-option
             v-for="(item, key) in options"
             :key="key"
@@ -37,55 +37,58 @@
         </p>
       </li>
       <li>
-        <p>
-          <span>线索位置：</span>
-            <el-cascader
-              @change="dateFn"
-              placeholder="请选择渠道来源"
-              :options="options2"
-              filterable
-              size="medium"
-              v-model="source"
-              pops = "{
-                value: 'label',
-                lavel: 'value'
-              }">
-            </el-cascader>
-        </p>
-        <p>
-          <span>客户地区：</span>
-            <el-cascader
-              @change="dateFn"
-              placeholder="请选择渠道来源"
-              :options="options2"
-              filterable
-              size="medium"
-              v-model="source"
-              pops = "{
-                value: 'label',
-                lavel: 'value'
-              }">
-            </el-cascader>
-        </p>
-      </li>
-      <li>
         <dl>
-          <dt>渠道来源：</dt>
+          <dt>线索位置：</dt>
           <dd>
-            <el-cascader
-              @change="dateFn"
-              placeholder="请选择渠道来源"
-              :options="options2"
-              filterable
-              size="medium"
-              v-model="source"
-              pops = "{
-                value: 'label',
-                lavel: 'value'
-              }">
-            </el-cascader>
+            <el-select placeholder="请选择线索库" v-model="clueLibrary" @change="dateFn">
+              <el-option
+                v-for="(item, key) in clueObj" :key="key"
+                :value="item.value"
+                :label="item.label"
+                filterable
+              ></el-option>
+            </el-select>
+            <el-select placeholder="请选择线索库" v-model="clueDep">
+              <el-option
+                v-for="(item, key) in clueObj" :key="key"
+                :value="item.value"
+                :label="item.label"
+                filterable
+              ></el-option>
+            </el-select>
+            <el-select placeholder="请选择线索库" v-model="clueLibrary">
+              <el-option
+                v-for="(item, key) in clueLibraryArr" :key="key"
+                :value="item.value"
+                :label="item.label"
+                filterable
+              ></el-option>
+            </el-select>
+            <el-select placeholder="请选择线索库" v-model="clueLibrary">
+              <el-option
+                v-for="(item, key) in clueLibraryArr" :key="key"
+                :value="item.value"
+                :label="item.label"
+                filterable
+              ></el-option>
+            </el-select>
           </dd>
         </dl>
+        <dl>
+          <dt>客户地区：</dt>
+          <dd>
+            <el-select placeholder="请选择线索库" v-model="clueLibrary" @change="dateFn">
+              <el-option
+                v-for="(item, key) in clueLibraryArr" :key="key"
+                :value="item.value"
+                :label="item.label"
+                filterable
+              ></el-option>
+            </el-select>
+          </dd>
+        </dl>
+      </li>
+      <li>
         <dl>
           <dt>手机号/需求备注：</dt>
           <dd>
@@ -105,55 +108,40 @@
 
 <script>
 export default {
+  props: ['page'],
   data () {
     return {
-      date: [],
-      cluesState: '',
-      options: [{
-        value: '选项1',
-        label: '黄金糕'
-      }, {
-        value: '选项2',
-        label: '双皮奶'
-      }, {
-        value: '选项3',
-        label: '蚵仔煎'
-      }, {
-        value: '选项4',
-        label: '龙须面'
-      }, {
-        value: '选项5',
-        label: '北京烤鸭'
-      }],
-      source: [],
-      options2: [{
-        value: 'zhinan',
-        label: '全部来源',
-        children: [{
-          value: 'shejiyuanze',
-          label: '全部分类',
-          children: [{
-            value: 'yizhi',
-            label: '全部明细',
-            children: [{
-              value: 'ceshi',
-              label: '全部销售顾问'
-            }]
-          }]
-        }]
-      }],
-      area: []
+      clumb: [{path: '/clues', name: '线索管理'}, {name: '线索分配'}], // 面包屑
+      date: [], // 选择日期
+      cluesCategory: '全部类别', // 线索类别
+      clueType: '全部类型', // 线索类型
+      clueLibrary: 1, // 线索库
+      clueDep: '1',
+      category: [{value: '全部类别', label: '全部类别'}, {value: '1', label: '黄金糕'}],
+      options: [{value: '全部类型', label: '全部类型'}, {value: '1', label: '黄金糕'}],
+      clueLibraryArr: [{value: 1, label: '全部线索库'}, {value: '1', label: '黄金糕'}],
+      clueObj: [
+        {value: 1, label: '全部线索', children: [{value: 12, label: '部门', children: [{value: 13, label: '销售部', children: [{value: 14, label: '销售顾问'}]}]}]},
+        {value: 2, label: '线索1', children: [{value: 22, label: '部门1', children: [{value: 23, label: '销售1', children: [{value: 24, label: '顾问1'}]}]}]}
+      ],
+      arr: []
     }
   },
   methods: {
     dateFn () {
-
+      console.log(this.clueLibrary)
+    },
+    fn () {
+      console.log(this.cluesCategory)
     }
+  },
+  mounted () {
+    this.$emit('changeClumb', this.clumb)
   }
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
   .assignClues {
     .search {
       min-height: 36px;
@@ -171,6 +159,9 @@ export default {
         dl {
           display: flex;
           display: -webkit-flex;
+          .el-input__inner {
+            height: 36px;
+          }
         }
         p.time {
           height: 36px;
@@ -183,6 +174,12 @@ export default {
         }
         .el-cascader-menu{
           height: auto;
+        }
+      }
+      li:nth-child(2) {
+        .el-input__inner {
+          height: 36px;
+          width: 120px;
         }
       }
       li:last-child {

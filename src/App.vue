@@ -2,11 +2,6 @@
   <div id="app">
     <navbar ref='navbar' v-if="$store.state.blNav" @signIn="signIn" @ragister="ragister"></navbar>
     <router-view/>
-    <!-- 注册 -->
-    <register v-if="blReg"  @closeHint="closeHint"></register>
-    <!-- 登录 -->
-    <login v-if="blLog" @closeHint="closeHint"></login>
-    <!-- <footbar v-if="$store.state.blFoo"></footbar> -->
   </div>
 </template>
 
