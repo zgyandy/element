@@ -27,7 +27,7 @@
         </p>
         <p>
           <span>线索类型：</span>
-          <el-select placeholder="请选择" v-model="clueType">
+          <el-select placeholder="请选择线索类型" v-model="clueType">
             <el-option
             v-for="(item, key) in options"
             :key="key"
@@ -48,7 +48,7 @@
                 filterable
               ></el-option>
             </el-select>
-            <el-select placeholder="请选择线索库" v-model="clueDep">
+            <el-select placeholder="请选择事业部门" v-model="clueDep">
               <el-option
                 v-for="(item, key) in clueObj" :key="key"
                 :value="item.value"
@@ -56,17 +56,17 @@
                 filterable
               ></el-option>
             </el-select>
-            <el-select placeholder="请选择线索库" v-model="clueLibrary">
+            <el-select placeholder="请选择销售部" v-model="clueSales">
               <el-option
-                v-for="(item, key) in clueLibraryArr" :key="key"
+                v-for="(item, key) in clueObj" :key="key"
                 :value="item.value"
                 :label="item.label"
                 filterable
               ></el-option>
             </el-select>
-            <el-select placeholder="请选择线索库" v-model="clueLibrary">
+            <el-select placeholder="请选择顾问" v-model="clueCons">
               <el-option
-                v-for="(item, key) in clueLibraryArr" :key="key"
+                v-for="(item, key) in clueObj" :key="key"
                 :value="item.value"
                 :label="item.label"
                 filterable
@@ -77,7 +77,7 @@
         <dl>
           <dt>客户地区：</dt>
           <dd>
-            <el-select placeholder="请选择线索库" v-model="clueLibrary" @change="dateFn">
+            <el-select placeholder="请选择线索库" v-model="regions" @change="dateFn">
               <el-option
                 v-for="(item, key) in clueLibraryArr" :key="key"
                 :value="item.value"
@@ -114,12 +114,16 @@ export default {
       clumb: [{path: '/clues', name: '线索管理'}, {name: '线索分配'}], // 面包屑
       date: [], // 选择日期
       cluesCategory: '全部类别', // 线索类别
+      category: [{value: '全部类别', label: '全部类别'}, {value: '1', label: '黄金糕'}],
       clueType: '全部类型', // 线索类型
+      clueLibraryArr: [{value: 1, label: '全部线索库'}, {value: '1', label: '黄金糕'}],
       clueLibrary: 1, // 线索库
       clueDep: '1',
-      category: [{value: '全部类别', label: '全部类别'}, {value: '1', label: '黄金糕'}],
+      clueSales: '',
+      clueCons: '',
+      regions: '',
+      city: '',
       options: [{value: '全部类型', label: '全部类型'}, {value: '1', label: '黄金糕'}],
-      clueLibraryArr: [{value: 1, label: '全部线索库'}, {value: '1', label: '黄金糕'}],
       clueObj: [
         {value: 1, label: '全部线索', children: [{value: 12, label: '部门', children: [{value: 13, label: '销售部', children: [{value: 14, label: '销售顾问'}]}]}]},
         {value: 2, label: '线索1', children: [{value: 22, label: '部门1', children: [{value: 23, label: '销售1', children: [{value: 24, label: '顾问1'}]}]}]}
@@ -142,6 +146,7 @@ export default {
 </script>
 
 <style lang="less">
+  @import url('../../assets/css/common.css');
   .assignClues {
     .search {
       min-height: 36px;
