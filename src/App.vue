@@ -29,6 +29,9 @@ export default {
   },
   mounted () {
     this.$refs.navbar.activeFn()
+    this.$axios.get('/api/data/').then((res) => {
+      console.log(res)
+    })
   },
   components: {
     navbar, footbar, register, login

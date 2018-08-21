@@ -4,7 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store/index.js'
-import {Button, Select, Option, Radio, Input, InputNumber, Carousel, CarouselItem, DatePicker, TimePicker, Cascader, Table, TableColumn, Pagination, Popover, Tag} from 'element-ui'
+import axios from 'axios'
+import {Button, Select, Option, Radio, Input, InputNumber, Carousel, CarouselItem, DatePicker, TimePicker, Cascader, Table, TableColumn, Pagination, Popover, Tag, Checkbox, Slider} from 'element-ui'
+Vue.prototype.$axios = axios
 
 Vue.component(Button.name, Button)
 Vue.component(Select.name, Select)
@@ -22,10 +24,12 @@ Vue.component(TableColumn.name, TableColumn)
 Vue.component(Pagination.name, Pagination)
 Vue.component(Popover.name, Popover)
 Vue.component(Tag.name, Tag)
+Vue.component(Checkbox.name, Checkbox)
+Vue.component(Slider.name, Slider)
 
 require('./assets/iconfont/iconfont.css')
 require('./assets/css/common.css')
-
+require('./mock.js')
 Vue.config.productionTip = false
 // 修改title值
 router.beforeEach((to, from, next) => {

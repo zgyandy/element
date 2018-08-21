@@ -1,5 +1,4 @@
 import axios from 'axios'
-import Vue from 'vue'
 var baseUrl = ''
 var version = '1.0.1'
 // 环境判断
@@ -18,6 +17,13 @@ let axi = axios.create({
     varsion: version
   }
 })
+var getData = (params) => {
+  return axi.get(params.url).then(response => {
+    params.success && params.success(response.data)
+  }).catch((error) => {
+    params.fail && params.fail(error)
+  })
+}
 let postData = (refs) => {
   // 判断是否有数据 转换为表单数据
   var formData = new FormData()
@@ -34,7 +40,7 @@ let postData = (refs) => {
   }).then(res => {
     refs.success && refs.success(res.data)
   }).catch(error => {
-    refs.error && refs.error(error)
+    refs.fail && refs.fail(error)
   })
 }
-Vue.prototype.postData = postData
+export {postData, getData}
