@@ -1,8 +1,8 @@
 // 引入mockjs
 const Mock = require('mockjs')
 // 使用mockjs模拟数据
-Mock.mock('/api/data', (req, res) => {
+Mock.mock('data', 'get', function () {
   return {
-    data: ['a', 'b']
+    'age|1-6': 12
   }
 })

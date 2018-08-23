@@ -29,8 +29,8 @@ export default {
   },
   mounted () {
     this.$refs.navbar.activeFn()
-    this.$axios.get('/api/data/').then((res) => {
-      console.log(res)
+    this.$axios.get('data').then((res) => {
+      console.log(res.data)
     })
   },
   components: {
