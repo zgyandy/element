@@ -4,9 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store/index.js'
-import axios from 'axios'
 import {Button, Select, Option, Radio, Input, InputNumber, Carousel, CarouselItem, DatePicker, TimePicker, Cascader, Table, TableColumn, Pagination, Popover, Tag, Checkbox, Slider} from 'element-ui'
-Vue.prototype.$axios = axios
+import {getData, postData} from './config/base.js'
+Vue.prototype.getData = getData
+Vue.prototype.postData = postData
 
 Vue.component(Button.name, Button)
 Vue.component(Select.name, Select)

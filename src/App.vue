@@ -29,8 +29,20 @@ export default {
   },
   mounted () {
     this.$refs.navbar.activeFn()
-    this.$axios.get('data').then((res) => {
-      console.log(res.data)
+    this.getData({
+      url: 'data',
+      success: (res) => {
+        console.log(res)
+      },
+      fail: (error) => {
+        throw error
+      }
+    })
+    this.postData({
+      url: 'postTest',
+      success: (res) => {
+        console.log(res)
+      }
     })
   },
   components: {

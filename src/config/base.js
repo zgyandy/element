@@ -3,7 +3,7 @@ var baseUrl = ''
 var version = '1.0.1'
 // 环境判断
 if (process.env.NODE_ENV === 'development') {
-  baseUrl = '192.168.8.33:9010'
+  baseUrl = ''
 } else if (process.env.NODE_ENV === 'test') {
   baseUrl = 'test'
 } else if (process.env.NODE_ENV === 'production') {
