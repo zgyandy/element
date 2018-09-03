@@ -30,7 +30,10 @@ Vue.component(Slider.name, Slider)
 
 require('./assets/iconfont/iconfont.css')
 require('./assets/css/common.css')
-require('./mock.js')
+// 判断是否是开发模式
+if (process.env.NODE_ENV === 'development') {
+  require('./mock.js')
+}
 Vue.config.productionTip = false
 // 修改title值
 router.beforeEach((to, from, next) => {

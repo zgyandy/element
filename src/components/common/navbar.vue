@@ -18,7 +18,7 @@
         </li>
         <li class="userMsg">
           <p>
-            <span>您好：<em class="userName">{{userName}}</em><span>，欢迎登陆！上次登录时间：<em class="time">{{loginTime}}</em></span></span>
+            <span>您好：<em class="userName">{{userInfo.name}}</em><span>，欢迎登陆！上次登录时间：<em class="time">{{loginTime}}</em></span></span>
             <span class="loginOut">退出</span>
           </p>
           <dl>
@@ -51,6 +51,7 @@
 
 <script>
 export default {
+  props: ['userInfo'],
   data () {
     return {
       search: '',

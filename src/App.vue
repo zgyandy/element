@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <navbar ref='navbar' v-if="$store.state.blNav" @signIn="signIn" @ragister="ragister"></navbar>
-    <router-view/>
+    <navbar :userInfo='userInfo' ref='navbar' v-if="$store.state.blNav" @signIn="signIn" @ragister="ragister"></navbar>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 
@@ -16,34 +18,25 @@ export default {
     return {
       blLog: false,
       blReg: false,
-      navArr: []
+      navArr: [],
+      userInfo: {}
     }
   },
   beforeCreate () {
-    // 判断是否登录
-    if (Number(localStorage.getItem('login')) === 1) {
-      this.$store.commit('loginIn')
-    } else {
-      this.$store.commit('loginOut')
-    }
-  },
-  mounted () {
-    this.$refs.navbar.activeFn()
-    this.getData({
-      url: 'data',
+    // 登录
+    this.postData({
+      url: 'userinfo',
       success: (res) => {
         console.log(res)
+        this.userInfo = res
       },
       fail: (error) => {
         throw error
       }
     })
-    this.postData({
-      url: 'postTest',
-      success: (res) => {
-        console.log(res)
-      }
-    })
+  },
+  mounted () {
+    this.$refs.navbar.activeFn()
   },
   components: {
     navbar, footbar, register, login
