@@ -1,20 +1,27 @@
 <template>
   <div class="home">
-    <!-- banner -->
-    <el-carousel height="360" :interval="3000" trigger="hover">
-      <el-carousel-item v-for="item in 4" :key="item">
-        <h3>{{ item }}</h3>
-      </el-carousel-item>
-    </el-carousel>
+
   </div>
 </template>
 
 <script>
-export default {
 
+export default {
+  mounted () {
+    this.$store.dispatch('SANNAV', [])
+  }
 }
 </script>
 
 <style lang="less" scoped>
-
+  .home {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: url('../../assets/img/welcome.jpg') no-repeat center top;
+    background-size: 100%;
+  }
+  textarea{
+    line-height: 20px;
+  }
 </style>

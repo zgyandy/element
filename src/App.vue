@@ -1,12 +1,9 @@
 <template>
   <div id="app">
-    <navbar v-if="$store.state.blNav" @signIn="signIn" @ragister="ragister"></navbar>
-    <router-view/>
-    <!-- 注册 -->
-    <register v-if="blReg"  @closeHint="closeHint"></register>
-    <!-- 登录 -->
-    <login v-if="blLog" @closeHint="closeHint"></login>
-    <footbar v-if="$store.state.blFoo"></footbar>
+    <navbar :userInfo='userInfo' ref='navbar' v-if="$store.state.blNav" @signIn="signIn" @ragister="ragister"></navbar>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 
@@ -20,25 +17,29 @@ export default {
   data () {
     return {
       blLog: false,
-      blReg: false
+      blReg: false,
+      navArr: [],
+      userInfo: {}
     }
   },
   beforeCreate () {
-    // 判断是否登录
-    if (Number(localStorage.getItem('login')) === 1) {
-      this.$store.commit('loginIn')
-    } else {
-      this.$store.commit('loginOut')
-    }
+    // 登录
+    this.postData({
+      url: 'userinfo',
+      success: (res) => {
+        console.log(res)
+        this.userInfo = res
+      },
+      fail: (error) => {
+        throw error
+      }
+    })
   },
   mounted () {
-    console.log(this.$route.path)
+    this.$refs.navbar.activeFn()
   },
   components: {
     navbar, footbar, register, login
-  },
-  updated () {
-
   },
   methods: {
     signIn () {
@@ -55,6 +56,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="less" scoped>
+  #app {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
 </style>

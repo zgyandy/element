@@ -2,7 +2,6 @@
 html,body,ul,li,ol,dl,dd,dt,table,tbody,thead,tr,td,p,h1,h2,h3,h4,h5,h6,form,img,button,select,option,textarea {
   margin: 0;
   padding: 0;
-  user-select: none;
 }
 button {
   border: none;
@@ -64,6 +63,16 @@ em {
 /* 内容 */
 .content {
   background: #fff;
+  width: 1180px;
+  margin: 0 auto;
+  padding: 34px 10px 10px;
+  margin-bottom: 30px;
+}
+.red {
+  color: red;
+}
+.blue {
+  color: #428adf;
 }
 /* 光标样式 */
 .pointer {
@@ -77,4 +86,24 @@ em {
 .layout {
   width: 1200px;
   margin: 0 auto;
+}
+/* element ui 默认样式修改 */
+table .el-table--border th:first-child .cell {
+  padding: 0;
+  text-align: center;
+  word-break: normal;
+}
+table .cell {
+  padding: 0 !important;
+  text-align: center;
+  word-break: normal;
+}
+table .cell .name-wrapper {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+.el-table__row:nth-child(even) {
+  background: #f5f7fa;
 }

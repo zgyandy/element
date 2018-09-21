@@ -1,9 +1,12 @@
 import * as types from './type.js'
 export default {
-  AddTest: ({commit, state}) => {
+  AddTest: ({commit}) => {
     commit(types.AddTest)
   },
-  RadTest: ({commit, state}) => {
+  RadTest: ({commit}) => {
     commit(types.RadTest)
+  },
+  SANNAV: ({commit}, payload) => {
+    commit(types.SANNAV, payload)
   }
 }
