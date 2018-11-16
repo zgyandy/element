@@ -107,3 +107,9 @@ table .cell .name-wrapper {
 .el-table__row:nth-child(even) {
   background: #f5f7fa;
 }
+.search .el-select {
+  width: 140px;
+}
+.search .el-input--medium{
+  width: 260px;
+}

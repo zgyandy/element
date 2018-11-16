@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <navbar :userInfo='userInfo' ref='navbar' v-if="$store.state.blNav" @signIn="signIn" @ragister="ragister"></navbar>
-    <keep-alive>
-      <router-view/>
-    </keep-alive>
+    <router-view/>
   </div>
 </template>
 
@@ -27,7 +25,6 @@ export default {
     this.postData({
       url: 'userinfo',
       success: (res) => {
-        console.log(res)
         this.userInfo = res
       },
       fail: (error) => {

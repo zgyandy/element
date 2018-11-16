@@ -42,7 +42,7 @@
     </div>
     <!-- 子导航 -->
     <ul class="navSan layout" v-if="$store.state.navArr.length > 1">
-      <li :class="{'active': currentPath.indexOf(item.path) !== -1}" v-for="(item, key) in $store.state.navArr" :key="key" @click.stop="activeFn">
+      <li :class="{'active': currentPath.lastIndexOf(item.path) !== -1}" v-for="(item, key) in $store.state.navArr" :key="key" @click.stop="activeFn">
         <router-link :to="item.path"><span>{{item.name}}</span></router-link>
       </li>
     </ul>

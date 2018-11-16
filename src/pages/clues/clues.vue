@@ -2,7 +2,9 @@
   <div class="clues layout">
     <!-- 面包屑 -->
     <clumbs :clumbArr="clumbArr"></clumbs>
-    <router-view @changeClumb="changeClumb"></router-view>
+    <keep-alive>
+      <router-view @changeClumb="changeClumb"></router-view>
+    </keep-alive>
   </div>
 </template>
 

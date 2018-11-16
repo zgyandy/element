@@ -2,60 +2,31 @@
   <div class="customer content">
     <ul class="search">
       <li>
-        <p class="time">
-          <span>创建日期：</span>
-          <el-date-picker
-            v-model="date"
-            type="daterange"
-            align="right"
-            unlink-panels
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            value-format="yyyy-MM-dd"
-            :picker-options="pickerOptions2">
-          </el-date-picker>
-        </p>
-        <p>
-          <span>渠道来源：</span>
-            <el-cascader
-              @change="dateFn"
-              placeholder="请选择渠道来源"
-              :options="options"
-              filterable
-              size="medium"
-              v-model="source"
-              change-on-select>
-            </el-cascader>
-        </p>
-        <p>
-          <span>责任人：</span>
-            <el-cascader
-              placeholder="请选择责任人"
-              :options="options"
-              filterable
-              size="medium">
-            </el-cascader>
-        </p>
-        <p>
+        <!-- 日期 -->
+        <datePicker ref="datePicker" :format="format"></datePicker>
+        <!-- 线索类别 -->
+        <clueType refs="clueType"></clueType>
+        <!-- 线索类型 -->
+        <clurForm></clurForm>
+        <!-- 线索位置 -->
+        <clueLibrary></clueLibrary>
+        <!-- 客户地区 -->
+        <regions></regions>
+        <!-- 渠道来源 -->
+        
+        <!-- 确认按钮 -->
+        <div>
           <el-button
           size="medium"
           type="primary"
+          @click= 'search'
           >确认</el-button>
-        </p>
+        </div>
       </li>
     </ul>
-    <p class="resultShow">
-      <span>找到相关结果<em class="red">{{resultNum}}个，</em></span>
-      <span v-for="(item, key) in date" :key="key"><em class="blue">{{item}}</em><span v-show="key === 0">&nbsp;至&nbsp;</span></span>
-      <span>新线索<em class="red">12</em>个，</span>
-      <span>有效单<em class="red">12</em>个，</span>
-      <span>待定单<em class="red">12</em>个，</span>
-      <span>无效单<em class="red">12</em>个，</span>
-      <span>放弃单<em class="red">12</em>个。</span>
-    </p>
+    <resultMsg :date="date" :resultNum="resultNum" :resultArr="resultArr"></resultMsg>
     <div class="tableBox">
-      <el-table :data="tabData" style="width: 1180px" border>
+      <el-table :data="tableData" style="width: 1180px" border>
         <el-table-column prop="date" label="日期" sortable align="center" width="94"></el-table-column>
         <el-table-column label="新线索" align="center">
           <el-table-column prop="newClue" label="总量" width="32"></el-table-column>
@@ -111,66 +82,53 @@
       </el-table>
     </div>
     <!-- 分页 -->
-    <div class="pageResult">
-        <el-pagination
-          :background="true"
-          :page-size="20"
-          :total="tableData.length"
-          layout="prev, pager, next, jumper"
-          @current-change="fn"
-        ></el-pagination>
-    </div>
+    <pageInation :totalPage="tableData.length" @pageFn="pageFn"></pageInation>
   </div>
 </template>
 
 <script>
+// 日期选择器
+import datePicker from '../../components/common/datePicker'
+// 线索类别
+import clueType from '../../components/clue/clueType'
+// 线索类型
+import clurForm from '../../components/clue/clueForm'
+// 线索位置
+import clueLibrary from '../../components/clue/clueLibrary'
+// 搜索结果
+import resultMsg from '../../components/common/resultMsg'
+// 地区
+import regions from '../../components/common/regions'
+// 分页
+import pageInation from '../../components/paging/pageination'
 export default {
   data () {
     return {
       clumb: [{path: '/clues', name: '线索管理'}, {name: '客户线索'}],
-      pickerOptions2: {
-        shortcuts: [{
-          text: '最近一周',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近一个月',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近三个月',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-            picker.$emit('pick', [start, end])
-          }
-        }]
-      },
-      date: '',
+      format: 'yyyy-MM-dd',
+      date: [],
+      resultArr: [],
       options: [],
       resultNum: 12,
       tableData: [],
-      source: [],
-      num: 0,
-      tabData: []
+      province: '',
+      city: ''
     }
   },
   methods: {
-    dateFn () {
-      console.log(this.source)
-    },
-    fn (n) {
+    pageFn (n) {
       n = n || 1
-      this.tabData = this.tableData.slice((n - 1) * 20, ((n - 1) * 20 + 20) > this.tableData.length ? this.tableData.length : (n - 1) * 20 + 20)
+      // this.tabData = this.tableData.slice((n - 1) * 20, ((n - 1) * 20 + 20) > this.tableData.length ? this.tableData.length : (n - 1) * 20 + 20)
+    },
+    search () {
+      this.date = this.$refs.datePicker.date
+      console.log(this.$refs.datePicker.date)
+    },
+    fn(item) {
+      console.log(item)
+    },
+    fnnn (n) {
+      console.log(n)
     }
   },
   beforeCreate () {
@@ -188,8 +146,7 @@ export default {
       success: (res) => {
         this.tableData = res
         // 调用分页方法
-        this.fn()
-        console.log(this.tableData)
+        this.pageFn()
       },
       fail: (error) => {
         throw error
@@ -198,6 +155,9 @@ export default {
   },
   mounted () {
     this.$emit('changeClumb', this.clumb)
+  },
+  components: {
+    datePicker, resultMsg, regions, pageInation, clueType, clurForm, clueLibrary
   }
 }
 </script>
@@ -205,34 +165,22 @@ export default {
 <style lang="less">
   .customer {
     .search {
-      height: 36px;
-      padding-bottom: 20px;
+      padding-bottom: 10px;
       border-bottom: 1px solid  #dddddd;
       font-size: 16px;
       li {
-        height: 36px;
         line-height: 36px;
+        width: 1180px;
         font-size: 16px;
         display: flex;
         display: -webkit-flex;
         justify-content: space-between;
-        p.time {
-          height: 36px;
-          .el-icon-date {
-            font-size: 16px;
-          }
-          .el-date-editor {
-            height: 36px;
-          }
+        flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        &>div {
+          padding-bottom: 10px;
         }
       }
-
-    }
-    .resultShow {
-      height: 45px;
-      padding-top: 14px;
-      line-height: 28px;
-      font-size: 14px;
     }
     .tableBox {
       box-sizing: border-box;
@@ -243,6 +191,17 @@ export default {
       display: flex;
       display: -webkit-flex;
       justify-content: flex-end;
+    }
+  }
+  .test {
+    height: 20px;
+    width: 50px;
+    word-wrap: wrap;
+    line-height: 20px;
+    word-break: break-all;
+    img {
+      vertical-align: bottom;
+      // opacity: 0;
     }
   }
 </style>
