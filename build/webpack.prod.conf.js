@@ -10,7 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-
+var PrerenderSpaPlugin = require('prerender-spa-plugin')
 const env = require('../config/prod.env')
 
 const webpackConfig = merge(baseWebpackConfig, {
@@ -115,7 +115,14 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    new PrerenderSpaPlugin({
+      // 编译后的html需要存放的路径
+      staticDir: path.join(__dirname, '../dist'),
+      // 言语渲染的页面
+      routes: ['/home', '/clues/assignClues', '/clues/assignClues'],
+      // renderAfterElementExists : 'document.querySelector("#app")'
+    })
   ]
 })
 

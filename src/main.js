@@ -6,9 +6,10 @@ import router from './router'
 import store from './store/index.js'
 import {Button, Select, Option, Radio, Input, InputNumber, Carousel, CarouselItem, DatePicker, TimePicker, Cascader, Table, TableColumn, Pagination, Popover, Tag, Checkbox, Slider} from 'element-ui'
 import {getData, postData} from './config/base.js'
+import MetaInfo from 'vue-meta-info'
 Vue.prototype.getData = getData
 Vue.prototype.postData = postData
-
+Vue.use(MetaInfo)
 Vue.component(Button.name, Button)
 Vue.component(Select.name, Select)
 Vue.component(Option.name, Option)
